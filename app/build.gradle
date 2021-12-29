@@ -80,4 +80,7 @@ dependencies {
     //koin
     implementation "io.insert-koin:koin-core:$koinVersion"
     implementation "io.insert-koin:koin-android:$koinVersion"
+
+    //lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }
