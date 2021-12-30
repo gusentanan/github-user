@@ -5,4 +5,5 @@
     <string name="no_data">No Data</string>
     <!-- item card -->
     <string name="tv_item_exname">bagus merta</string>
+    <string name="search_hint">Insert Github Username</string>
 </resources>

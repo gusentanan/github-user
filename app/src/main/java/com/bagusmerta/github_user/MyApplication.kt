@@ -1,6 +1,10 @@
 package com.bagusmerta.github_user
 
 import android.app.Application
+import com.bagusmerta.github_user.core.di.networkModule
+import com.bagusmerta.github_user.core.di.repositoryModule
+import com.bagusmerta.github_user.di.useCaseModule
+import com.bagusmerta.github_user.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -12,7 +16,12 @@ class MyApplication: Application() {
         startKoin {
             androidLogger(Level.NONE)
             androidContext(this@MyApplication)
-            modules()
+            modules(
+                networkModule,
+                repositoryModule,
+                useCaseModule,
+                viewModelModule
+            )
         }
     }
 }
