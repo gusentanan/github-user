@@ -27,15 +27,15 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.elevation = 0f
         initRecyclerView()
+        initSearchMenu()
         initStateObserver()
 
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.option_menu, menu)
+    private fun initSearchMenu(){
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.search_bar).actionView as SearchView
+        val searchView = findViewById<SearchView>(R.id.sv_search)
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)
@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(query: String?): Boolean = false
 
         })
-        return true
     }
 
     private fun initStateObserver(){
