@@ -1,5 +1,6 @@
 package com.bagusmerta.github_user.core.domain.usecase
 
+import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.domain.repository.IUsersRepository
 import com.bagusmerta.github_user.core.utils.ResultState
@@ -9,6 +10,10 @@ class UsersInteractor(private val userRepository: IUsersRepository): UsersUseCas
 
     override suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>> {
         return userRepository.getUsersByUsername(username)
+    }
+
+    override suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>> {
+        return userRepository.getDetailUser(username)
     }
 
 }
