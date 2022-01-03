@@ -9,7 +9,8 @@ import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.core.utils.ResultState
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
@@ -17,6 +18,7 @@ class MainViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
     private val _state = MutableLiveData<LoadingState>()
     private val _error = MutableLiveData<String?>()
     private val _result = MutableLiveData<List<UsersItemSearch>?>()
+    private val _splashState = MutableStateFlow(true)
 
     val state: LiveData<LoadingState>
         get() = _state
@@ -24,6 +26,15 @@ class MainViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
     val result: LiveData<List<UsersItemSearch>?>
         get() = _result
 
+    val splashState
+        get() = _splashState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            delay(3000)
+            _splashState.value = false
+        }
+    }
 
     fun getUsersByUsername(q: String) {
         _state.value = LoadingState.ShowLoading

@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initSplashScreen()
         setContentView(binding.root)
 
         supportActionBar?.elevation = 0f
@@ -31,6 +34,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun initSplashScreen(){
+        installSplashScreen().apply {
+            setKeepVisibleCondition {
+                mainViewModel.splashState.value
+            }
+        }
+    }
 
     private fun initSearchMenu(){
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
