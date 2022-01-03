@@ -1,6 +1,7 @@
 package com.bagusmerta.github_user.core.data.source
 
 import com.bagusmerta.github_user.core.data.source.remote.network.ApiServices
+import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.domain.repository.IUsersRepository
 import com.bagusmerta.github_user.core.utils.DataMapper
@@ -20,6 +21,18 @@ class UsersRepository(private val apiServices: ApiServices): IUsersRepository {
                 val dataMap = res.items?.let { data ->
                     DataMapper.mapUserSearchResponseToDomain(data)
                 }
+                emit(ResultState.Success(dataMap))
+            } catch (e: Exception){
+                emit(ResultState.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>> {
+        return flow {
+            try {
+                val res = apiServices.getDetailUser(username)
+                val dataMap = DataMapper.mapUserDetailResponseToDomain(res)
                 emit(ResultState.Success(dataMap))
             } catch (e: Exception){
                 emit(ResultState.Error(e.toString()))

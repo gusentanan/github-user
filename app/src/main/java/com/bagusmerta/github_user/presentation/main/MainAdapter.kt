@@ -2,11 +2,13 @@ package com.bagusmerta.github_user.presentation.main
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
+import com.bagusmerta.github_user.presentation.detail.DetailActivity
 import com.bumptech.glide.Glide
 
 class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
@@ -34,6 +36,11 @@ class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapt
                         .into(imgItem)
                     tvItemName.text = item.login
 
+                    itemView.setOnClickListener {
+                        context.startActivity(Intent(context, DetailActivity::class.java).apply {
+                            putExtra(DetailActivity.USERNAME, item.login)
+                        })
+                    }
                 }
             }
     }

@@ -1,6 +1,45 @@
 package com.bagusmerta.github_user.presentation.detail
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bagusmerta.github_user.core.domain.model.UserDetail
+import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
+import com.bagusmerta.github_user.core.utils.LoadingState
+import com.bagusmerta.github_user.core.utils.ResultState
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
+    private val _state = MutableLiveData<LoadingState>()
+    private val _result = MutableLiveData<UserDetail?>()
+    private val _error = MutableLiveData<String?>()
+
+    val state: LiveData<LoadingState>
+        get() = _state
+
+    val result: LiveData<UserDetail?>
+        get() = _result
+
+
+    fun getDetailUser(username: String){
+        _state.value = LoadingState.ShowLoading
+        viewModelScope.launch {
+            usersUseCase.getDetailUser(username).collect {
+                when(it){
+                    is ResultState.Success -> {
+                        _result.postValue(it.data)
+                        _state.value = LoadingState.HideLoading
+                    }
+                    is ResultState.Error -> {
+                        _error.postValue(it.errMessage)
+                    }
+                    is ResultState.Empty -> {
+                        _result.postValue(null)
+                    }
+                }
+            }
+        }
+    }
 }
