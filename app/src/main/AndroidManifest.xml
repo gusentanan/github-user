@@ -14,7 +14,8 @@
         android:theme="@style/Theme.App.Starting">
         <activity
             android:name=".presentation.detail.DetailActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.Githubuser.ActionBar"/>
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true"

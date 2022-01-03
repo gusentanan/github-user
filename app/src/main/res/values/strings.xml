@@ -6,4 +6,16 @@
     <!-- item card -->
     <string name="tv_item_exname">bagus merta</string>
     <string name="search_hint">Insert Github Username</string>
+
+    <!-- detail section -->
+    <string name="ex_username">gusentanan</string>
+    <string name="ex_name">Bagus Merta</string>
+    <string name="ex_company">Google</string>
+    <string name="ex_location">Denpasar. Bali</string>
+    <string name="tv_repository">Repository</string>
+    <string name="ex_repository">20</string>
+    <string name="tv_following">Following</string>
+    <string name="ex_following">21</string>
+    <string name="tv_followers">Followers</string>
+    <string name="ex_followers">25</string>
 </resources>
