@@ -2,11 +2,13 @@ package com.bagusmerta.github_user.presentation.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings.Global.getString
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.viewpager2.widget.ViewPager2
 import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.UserDetail
+import com.bagusmerta.github_user.core.utils.Constants.EXTRA_USERNAME
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.databinding.ActivityDetailBinding
 import com.bagusmerta.github_user.presentation.viewpager.ViewPagerAdapter
@@ -52,8 +54,8 @@ class DetailActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             when(position){
-                0 -> tab.text = "Followers"
-                1 -> tab.text = "Following"
+                0 -> tab.text = getString(R.string.followers)
+                1 -> tab.text = getString(R.string.following)
             }
         }.attach()
     }
@@ -99,6 +101,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val USERNAME = "username"
+        const val USERNAME = EXTRA_USERNAME
     }
 }
