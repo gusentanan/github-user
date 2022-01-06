@@ -1,44 +1,39 @@
-package com.bagusmerta.github_user.presentation.detail
+package com.bagusmerta.github_user.presentation.following
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bagusmerta.github_user.core.domain.model.UserDetail
+import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.core.utils.ResultState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class DetailViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
+class FollowingViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
     private val _state = MutableLiveData<LoadingState>()
-    private val _result = MutableLiveData<UserDetail?>()
     private val _error = MutableLiveData<String?>()
-
+    private val _resFollowing = MutableLiveData<List<UsersItemSearch>?>()
 
     val state: LiveData<LoadingState>
         get() = _state
 
-    val result: LiveData<UserDetail?>
-        get() = _result
+    val resFollowing: LiveData<List<UsersItemSearch>?>
+        get() = _resFollowing
 
 
-    fun getDetailUser(username: String){
-        _state.value = LoadingState.ShowLoading
+    fun getUsersFollowing(username: String){
         viewModelScope.launch {
-            usersUseCase.getDetailUser(username).collect {
+            _state.value = LoadingState.ShowLoading
+            usersUseCase.getUsersFollowing(username).collect {
                 when(it){
                     is ResultState.Success -> {
-                        _result.postValue(it.data)
+                        _resFollowing.postValue(it.data)
                         _state.value = LoadingState.HideLoading
                     }
-                    is ResultState.Error -> {
-                        _error.postValue(it.errMessage)
-                    }
-                    is ResultState.Empty -> {
-                        _result.postValue(null)
-                    }
+                    is ResultState.Error -> _error.postValue(it.errMessage)
+                    is ResultState.Empty -> _resFollowing.postValue(null)
                 }
             }
         }

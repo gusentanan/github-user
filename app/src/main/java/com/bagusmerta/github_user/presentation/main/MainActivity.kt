@@ -12,7 +12,6 @@ import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.databinding.ActivityMainBinding
-import kotlinx.coroutines.delay
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
