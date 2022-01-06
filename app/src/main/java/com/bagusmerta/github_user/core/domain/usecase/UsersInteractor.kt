@@ -16,4 +16,12 @@ class UsersInteractor(private val userRepository: IUsersRepository): UsersUseCas
         return userRepository.getDetailUser(username)
     }
 
+    override suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+        return userRepository.getUsersFollowers(username)
+    }
+
+    override suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+        return userRepository.getUsersFollowing(username)
+    }
+
 }

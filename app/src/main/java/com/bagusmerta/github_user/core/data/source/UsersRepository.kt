@@ -40,5 +40,29 @@ class UsersRepository(private val apiServices: ApiServices): IUsersRepository {
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+        return flow {
+            try {
+                val res = apiServices.getUserFollowers(username)
+                val dataMap = DataMapper.mapUserSearchResponseToDomain(res) // gonna fix this later
+                emit(ResultState.Success(dataMap))
+            } catch (e: Exception){
+                emit(ResultState.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+        return flow {
+            try {
+                val res = apiServices.getUserFollowing(username)
+                val dataMap = DataMapper.mapUserSearchResponseToDomain(res) // this one too !
+                emit(ResultState.Success(dataMap))
+            } catch (e: Exception){
+                emit(ResultState.Error(e.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
 
 }

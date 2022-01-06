@@ -9,4 +9,6 @@ interface UsersUseCase {
 
     suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>>
     suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>>
+    suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>>
+    suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>>
 }

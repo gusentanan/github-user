@@ -3,17 +3,23 @@ package com.bagusmerta.github_user.presentation.viewpager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.bagusmerta.github_user.core.data.source.remote.response.UsersFollowersResponse
+import com.bagusmerta.github_user.core.data.source.remote.response.UsersFollowingResponse
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
+import com.bagusmerta.github_user.presentation.followers.FollowersFragment
+import com.bagusmerta.github_user.presentation.following.FollowingFragment
 
 class ViewPagerAdapter(
-    activity: AppCompatActivity,
+    activity: AppCompatActivity
 ): FragmentStateAdapter(activity){
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
-        TODO("Not yet implemented")
+        return when(position){
+            0 -> FollowersFragment()
+            1 -> FollowingFragment()
+            else -> FollowersFragment()
+        }
     }
-
 }

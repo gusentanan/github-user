@@ -10,6 +10,8 @@
         <entry key="..\:/PlayGround/android/github-user/app/src/main/res/layout/activity_main.xml" value="0.21296296296296297" />
         <entry key="..\:/PlayGround/android/github-user/app/src/main/res/layout/custom_app_bar.xml" value="0.24256410256410257" />
         <entry key="..\:/PlayGround/android/github-user/app/src/main/res/layout/empty_state_lottie.xml" value="0.25" />
+        <entry key="..\:/PlayGround/android/github-user/app/src/main/res/layout/fragment_followers.xml" value="0.25" />
+        <entry key="..\:/PlayGround/android/github-user/app/src/main/res/layout/fragment_following.xml" value="0.2359375" />
         <entry key="..\:/PlayGround/android/github-user/app/src/main/res/layout/fragment_view_pager.xml" value="0.24635416666666668" />
         <entry key="..\:/PlayGround/android/github-user/app/src/main/res/layout/item_row_users.xml" value="0.25" />
         <entry key="..\:/PlayGround/android/github-user/app/src/main/res/menu/option_menu.xml" value="0.25" />
