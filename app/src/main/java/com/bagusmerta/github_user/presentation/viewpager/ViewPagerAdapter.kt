@@ -3,9 +3,6 @@ package com.bagusmerta.github_user.presentation.viewpager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.bagusmerta.github_user.core.data.source.remote.response.UsersFollowersResponse
-import com.bagusmerta.github_user.core.data.source.remote.response.UsersFollowingResponse
-import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.presentation.followers.FollowersFragment
 import com.bagusmerta.github_user.presentation.following.FollowingFragment
 

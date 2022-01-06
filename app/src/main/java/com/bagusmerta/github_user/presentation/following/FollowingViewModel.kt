@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
 import com.bagusmerta.github_user.core.utils.LoadingState

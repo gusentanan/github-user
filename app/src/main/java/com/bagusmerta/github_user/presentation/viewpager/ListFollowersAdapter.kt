@@ -2,14 +2,11 @@ package com.bagusmerta.github_user.presentation.viewpager
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
-import com.bagusmerta.github_user.presentation.detail.DetailActivity
-import com.bagusmerta.github_user.presentation.main.MainAdapter
 import com.bumptech.glide.Glide
 
 class ListFollowersAdapter(private val context: Context): RecyclerView.Adapter<ListFollowersAdapter.ViewHolder>()  {
