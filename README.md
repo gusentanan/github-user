@@ -2,6 +2,7 @@
 ## Tech Stack:
 - Coroutines Flow
 - Retrofit2
+- ViewPager2
 - Room
 - Glide
 - Koin 
