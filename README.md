@@ -1,4 +1,6 @@
 # Github User
+I'm gonna be honest with you, this is just a simple github user finder. I made it for learning purpose..
+
 ## Tech Stack:
 - Coroutines Flow
 - Retrofit2
