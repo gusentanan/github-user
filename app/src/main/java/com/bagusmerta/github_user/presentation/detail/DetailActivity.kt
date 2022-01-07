@@ -3,12 +3,16 @@ package com.bagusmerta.github_user.presentation.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings.Global.getString
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.bagusmerta.github_user.R
+import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.utils.Constants.EXTRA_USERNAME
+import com.bagusmerta.github_user.core.utils.DataMapper
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.databinding.ActivityDetailBinding
 import com.bagusmerta.github_user.presentation.viewpager.ViewPagerAdapter
@@ -24,6 +28,10 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabs: TabLayout
     private lateinit var viewPagerAdapter: ViewPagerAdapter
+
+    private var favoriteUser: FavoriteUser? = null
+    private var detailUser: UserDetail? = null
+    private var favoriteState = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +53,10 @@ class DetailActivity : AppCompatActivity() {
     private fun initActionBar(){
         supportActionBar?.title = resources.getString(R.string.detail_activity)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.fabFavorite.setOnClickListener {
+            setFavoriteUser()
+        }
     }
 
     private fun initViewPager(){
@@ -65,6 +77,17 @@ class DetailActivity : AppCompatActivity() {
         return true
     }
 
+    private fun setFavoriteUser(){
+        if (favoriteState){
+            favoriteUser?.let { detailViewModel.deleteFavoriteUser(it) }
+            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        }else{
+            val fav = detailUser?.let { DataMapper.mapDetailUserToFavoriteUser(it) }
+            fav?.let { detailViewModel.addFavoriteUser(it) }
+            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+        }
+    }
+
     private fun initStateObserver(){
         val username = intent.getSerializableExtra(USERNAME) as String
         with(detailViewModel){
@@ -76,7 +99,6 @@ class DetailActivity : AppCompatActivity() {
                 it?.let { data -> handleUserDetailResult(data) }
             }
         }
-
     }
 
     private fun handleLoadingState(loadingState: LoadingState){
@@ -84,8 +106,8 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun handleUserDetailResult(userData: UserDetail){
+        detailUser = userData
         binding.apply {
-
             Glide.with(applicationContext)
                 .load(userData.avatarUrl)
                 .into(imgProfile)

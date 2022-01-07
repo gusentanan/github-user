@@ -3,6 +3,7 @@ package com.bagusmerta.github_user.di
 import com.bagusmerta.github_user.core.domain.usecase.UsersInteractor
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
 import com.bagusmerta.github_user.presentation.detail.DetailViewModel
+import com.bagusmerta.github_user.presentation.favorite.FavoriteViewModel
 import com.bagusmerta.github_user.presentation.followers.FollowersViewModel
 import com.bagusmerta.github_user.presentation.following.FollowingViewModel
 import com.bagusmerta.github_user.presentation.main.MainViewModel
@@ -19,5 +20,6 @@ val viewModelModule = module {
     viewModel { DetailViewModel(get()) }
     viewModel { FollowersViewModel(get())}
     viewModel { FollowingViewModel(get()) }
+    viewModel { FavoriteViewModel(get()) }
 }
 

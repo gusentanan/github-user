@@ -1,6 +1,7 @@
 package com.bagusmerta.github_user
 
 import android.app.Application
+import com.bagusmerta.github_user.core.di.databaseModule
 import com.bagusmerta.github_user.core.di.networkModule
 import com.bagusmerta.github_user.core.di.repositoryModule
 import com.bagusmerta.github_user.di.useCaseModule
@@ -17,6 +18,7 @@ class MyApplication: Application() {
             androidLogger(Level.NONE)
             androidContext(this@MyApplication)
             modules(
+                databaseModule,
                 networkModule,
                 repositoryModule,
                 useCaseModule,

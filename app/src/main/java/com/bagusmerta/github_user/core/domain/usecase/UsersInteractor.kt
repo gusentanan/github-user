@@ -1,5 +1,6 @@
 package com.bagusmerta.github_user.core.domain.usecase
 
+import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.domain.repository.IUsersRepository
@@ -22,6 +23,26 @@ class UsersInteractor(private val userRepository: IUsersRepository): UsersUseCas
 
     override suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>> {
         return userRepository.getUsersFollowing(username)
+    }
+
+    override fun getAllFavoriteUsers(): Flow<List<FavoriteUser>> {
+        return userRepository.getAllFavoriteUsers()
+    }
+
+    override suspend fun addFavoriteUser(entity: FavoriteUser) {
+        try {
+            userRepository.addFavoriteUser(entity)
+        }catch (e:Exception){
+            throw Exception(e)
+        }
+    }
+
+    override suspend fun deleteFavoriteUser(entity: FavoriteUser) {
+        try {
+            userRepository.deleteFavoriteUser(entity)
+        }catch (e:Exception){
+            throw Exception(e)
+        }
     }
 
 }

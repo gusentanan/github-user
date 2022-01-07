@@ -2,9 +2,11 @@ package com.bagusmerta.github_user.presentation.main
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.*
+import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.databinding.ActivityMainBinding
+import com.bagusmerta.github_user.presentation.favorite.FavoriteActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         initSearchMenu()
         initStateObserver()
 
+        findViewById<ImageView>(R.id.btn_favorite).setOnClickListener {
+            startActivity(Intent(this@MainActivity, FavoriteActivity::class.java))
+        }
     }
 
     private fun initSplashScreen(){

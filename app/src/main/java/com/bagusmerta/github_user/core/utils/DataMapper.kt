@@ -1,7 +1,9 @@
 package com.bagusmerta.github_user.core.utils
 
+import com.bagusmerta.github_user.core.data.source.local.entity.FavoriteEntity
 import com.bagusmerta.github_user.core.data.source.remote.response.UserDetailResponse
 import com.bagusmerta.github_user.core.data.source.remote.response.UserItemResponse
+import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 
@@ -27,6 +29,44 @@ object DataMapper {
             id = data.id,
             location = data.location,
             company = data.company
+        )
+
+    fun mapFavoriteUserToDomain(data: List<FavoriteEntity>): List<FavoriteUser> =
+        data.map {
+            FavoriteUser(
+                username = it.username,
+                name = it.name,
+                location = it.location,
+                company = it.company,
+                publicRepos = it.publicRepos,
+                followers = it.followers,
+                following = it.following,
+                avatarUrl = it.avatarUrl
+            )
+        }
+
+    fun mapFavoriteUserToEntity(data: FavoriteUser): FavoriteEntity =
+        FavoriteEntity(
+            username = data.username,
+            name = data.name,
+            location = data.location,
+            company = data.company,
+            publicRepos = data.publicRepos,
+            followers = data.followers,
+            following = data.following,
+            avatarUrl = data.avatarUrl
+        )
+
+    fun mapDetailUserToFavoriteUser(data: UserDetail): FavoriteUser =
+        FavoriteUser(
+            username = data.login.toString(),
+            name = data.name,
+            location = data.location,
+            company = data.company,
+            publicRepos = data.publicRepos,
+            following = data.following,
+            followers = data.followers,
+            avatarUrl = data.avatarUrl
         )
 
 }
