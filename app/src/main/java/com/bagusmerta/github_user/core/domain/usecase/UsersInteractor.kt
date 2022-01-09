@@ -45,4 +45,8 @@ class UsersInteractor(private val userRepository: IUsersRepository): UsersUseCas
         }
     }
 
+    override suspend fun getFavoriteUserByUsername(username: String): FavoriteUser?{
+        return userRepository.getFavoriteUserByUsername(username)
+    }
+
 }

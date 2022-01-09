@@ -25,5 +25,6 @@
     <string name="following">Following</string>
     <string name="username">username</string>
     <string name="add_to_favorite">add favorite user</string>
+    <string name="favorite_users">Favorite Users</string>
 
 </resources>

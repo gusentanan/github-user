@@ -53,7 +53,7 @@ class DetailActivity : AppCompatActivity() {
     private fun initActionBar(){
         supportActionBar?.title = resources.getString(R.string.detail_activity)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        favoriteButtonState(false)
         binding.fabFavorite.setOnClickListener {
             setFavoriteUser()
         }
@@ -80,16 +80,17 @@ class DetailActivity : AppCompatActivity() {
     private fun setFavoriteUser(){
         if (favoriteState){
             favoriteUser?.let { detailViewModel.deleteFavoriteUser(it) }
-            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            favoriteButtonState(false)
         }else{
             val fav = detailUser?.let { DataMapper.mapDetailUserToFavoriteUser(it) }
             fav?.let { detailViewModel.addFavoriteUser(it) }
-            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            favoriteButtonState(true)
         }
     }
 
     private fun initStateObserver(){
         val username = intent.getSerializableExtra(USERNAME) as String
+        detailViewModel.getFavoriteUserByUsername(username)
         with(detailViewModel){
             getDetailUser(username)
             state.observe(this@DetailActivity){
@@ -97,6 +98,13 @@ class DetailActivity : AppCompatActivity() {
             }
             result.observe(this@DetailActivity){
                 it?.let { data -> handleUserDetailResult(data) }
+            }
+            resFavorite.observe(this@DetailActivity){
+                it?.let { favoriteUser = it }
+                if (favoriteUser != null){
+                    favoriteState = true
+                    favoriteButtonState(favoriteState)
+                }
             }
         }
     }
@@ -119,6 +127,14 @@ class DetailActivity : AppCompatActivity() {
             profileFollowers.text = userData.followers.toString()
             profileFollowing.text = userData.following.toString()
             profileRepository.text = userData.publicRepos.toString()
+        }
+    }
+
+    private fun favoriteButtonState(state: Boolean){
+        if(state){
+            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+        }else{
+            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
         }
     }
 

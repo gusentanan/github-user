@@ -45,7 +45,7 @@ object DataMapper {
             )
         }
 
-    fun mapFavoriteUserToEntity(data: FavoriteUser): FavoriteEntity =
+    fun mapFavoriteUserDomainToEntity(data: FavoriteUser): FavoriteEntity =
         FavoriteEntity(
             username = data.username,
             name = data.name,
@@ -56,6 +56,20 @@ object DataMapper {
             following = data.following,
             avatarUrl = data.avatarUrl
         )
+
+    fun mapFavoriteUserEntityToDomain(data: FavoriteEntity?): FavoriteUser ?=
+        data?.let {
+            FavoriteUser(
+                username = it.username,
+                name = data.name,
+                location = data.location,
+                company = data.company,
+                publicRepos = data.publicRepos,
+                followers = data.followers,
+                following = data.following,
+                avatarUrl = data.avatarUrl
+            )
+        }
 
     fun mapDetailUserToFavoriteUser(data: UserDetail): FavoriteUser =
         FavoriteUser(

@@ -75,13 +75,18 @@ class UsersRepository(private val apiServices: ApiServices, private val favorite
     }
 
     override suspend fun addFavoriteUser(entity: FavoriteUser) {
-        val data = DataMapper.mapFavoriteUserToEntity(entity)
-        Log.d("HELLO", "========================================================= $data")
+        val data = DataMapper.mapFavoriteUserDomainToEntity(entity)
         return favoriteDao.addFavoriteUser(data)
     }
 
     override suspend fun deleteFavoriteUser(entity: FavoriteUser) {
-        val data = DataMapper.mapFavoriteUserToEntity(entity)
+        val data = DataMapper.mapFavoriteUserDomainToEntity(entity)
         return favoriteDao.deleteFavoriteUser(data)
     }
+
+    override suspend fun getFavoriteUserByUsername(username: String): FavoriteUser?{
+        val userFav = favoriteDao.getFavoriteUserUsernameByUsername(username)
+        return DataMapper.mapFavoriteUserEntityToDomain(userFav)
+    }
+
 }

@@ -16,4 +16,7 @@ interface FavoriteDao {
     @Delete
     suspend fun deleteFavoriteUser(entity: FavoriteEntity)
 
+    @Query("SELECT username FROM favorite_table WHERE username = :username")
+    suspend fun getFavoriteUserUsernameByUsername(username: String): FavoriteEntity
+
 }
