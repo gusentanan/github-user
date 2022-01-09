@@ -106,6 +106,12 @@ class DetailActivity : AppCompatActivity() {
                     favoriteButtonState(favoriteState)
                 }
             }
+            insertState.observe(this@DetailActivity){
+                handleInsertState(it)
+            }
+            deleteState.observe(this@DetailActivity){
+                handleDeleteState(it)
+            }
         }
     }
 
@@ -135,6 +141,22 @@ class DetailActivity : AppCompatActivity() {
             binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
         }else{
             binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        }
+    }
+
+    private fun handleInsertState(state: Boolean){
+        if (state){
+            Toast.makeText(this, getString(R.string.add_to_favorite_success), Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this, getString(R.string.add_to_favorite_failed), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleDeleteState(state: Boolean){
+        if (state){
+            Toast.makeText(this, getString(R.string.delete_favorite_success), Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this, getString(R.string.delete_favorite_failed), Toast.LENGTH_SHORT).show()
         }
     }
 

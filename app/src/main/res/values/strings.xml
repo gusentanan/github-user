@@ -26,5 +26,9 @@
     <string name="username">username</string>
     <string name="add_to_favorite">add favorite user</string>
     <string name="favorite_users">Favorite Users</string>
+    <string name="add_to_favorite_success">Successfully added favorite user</string>
+    <string name="add_to_favorite_failed">Something Wrong: add favorite user</string>
+    <string name="delete_favorite_success">Successfully deleted favorite user</string>
+    <string name="delete_favorite_failed">Something Wrong: delete favorite user</string>
 
 </resources>
