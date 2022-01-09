@@ -57,7 +57,7 @@ object DataMapper {
             avatarUrl = data.avatarUrl
         )
 
-    fun mapFavoriteUserEntityToDomain(data: FavoriteEntity?): FavoriteUser ?=
+    fun mapFavoriteUserEntityToDomain(data: FavoriteEntity?): FavoriteUser? =
         data?.let {
             FavoriteUser(
                 username = it.username,

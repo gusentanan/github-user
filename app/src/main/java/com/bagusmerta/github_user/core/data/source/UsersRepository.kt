@@ -84,9 +84,9 @@ class UsersRepository(private val apiServices: ApiServices, private val favorite
         return favoriteDao.deleteFavoriteUser(data)
     }
 
-    override suspend fun getFavoriteUserByUsername(username: String): FavoriteUser?{
-        val userFav = favoriteDao.getFavoriteUserUsernameByUsername(username)
-        return DataMapper.mapFavoriteUserEntityToDomain(userFav)
+    override fun getFavoriteUserByUsername(username: String): Flow<FavoriteUser?>{
+        return favoriteDao.getFavoriteUserUsernameByUsername(username).map {
+            DataMapper.mapFavoriteUserEntityToDomain(it)
+        }
     }
-
 }

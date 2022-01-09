@@ -1,10 +1,7 @@
 package com.bagusmerta.github_user.presentation.detail
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
@@ -20,7 +17,6 @@ class DetailViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
     private val _error = MutableLiveData<String?>()
     private val _insertState = MutableLiveData<Boolean>()
     private val _deleteState = MutableLiveData<Boolean>()
-    private var _resFavorite = MutableLiveData<FavoriteUser>()
 
 
     val state: LiveData<LoadingState>
@@ -34,9 +30,6 @@ class DetailViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
 
     val deleteState: LiveData<Boolean>
         get() = _deleteState
-
-    val resFavorite: LiveData<FavoriteUser>
-        get() = _resFavorite
 
 
     fun getDetailUser(username: String){
@@ -55,14 +48,6 @@ class DetailViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
                         _result.postValue(null)
                     }
                 }
-            }
-        }
-    }
-
-    fun getFavoriteUserByUsername(username: String){
-        viewModelScope.launch {
-            usersUseCase.getFavoriteUserByUsername(username).let {
-                _resFavorite.postValue(it)
             }
         }
     }
@@ -90,5 +75,7 @@ class DetailViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
             }
         }
     }
+
+    fun getFavoriteUserByUsername(username: String) = usersUseCase.getFavoriteUserByUsername(username).asLiveData()
 
 }

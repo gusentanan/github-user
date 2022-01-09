@@ -53,7 +53,6 @@ class DetailActivity : AppCompatActivity() {
     private fun initActionBar(){
         supportActionBar?.title = resources.getString(R.string.detail_activity)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        favoriteButtonState(false)
         binding.fabFavorite.setOnClickListener {
             setFavoriteUser()
         }
@@ -80,17 +79,18 @@ class DetailActivity : AppCompatActivity() {
     private fun setFavoriteUser(){
         if (favoriteState){
             favoriteUser?.let { detailViewModel.deleteFavoriteUser(it) }
-            favoriteButtonState(false)
+            favoriteState = false
+            favoriteButtonState(favoriteState)
         }else{
             val fav = detailUser?.let { DataMapper.mapDetailUserToFavoriteUser(it) }
             fav?.let { detailViewModel.addFavoriteUser(it) }
-            favoriteButtonState(true)
+            favoriteState = true
+            favoriteButtonState(favoriteState)
         }
     }
 
     private fun initStateObserver(){
         val username = intent.getSerializableExtra(USERNAME) as String
-        detailViewModel.getFavoriteUserByUsername(username)
         with(detailViewModel){
             getDetailUser(username)
             state.observe(this@DetailActivity){
@@ -99,18 +99,18 @@ class DetailActivity : AppCompatActivity() {
             result.observe(this@DetailActivity){
                 it?.let { data -> handleUserDetailResult(data) }
             }
-            resFavorite.observe(this@DetailActivity){
-                it?.let { favoriteUser = it }
-                if (favoriteUser != null){
-                    favoriteState = true
-                    favoriteButtonState(favoriteState)
-                }
-            }
             insertState.observe(this@DetailActivity){
                 handleInsertState(it)
             }
             deleteState.observe(this@DetailActivity){
                 handleDeleteState(it)
+            }
+            getFavoriteUserByUsername(username).observe(this@DetailActivity){
+                it?.let {
+                    favoriteUser = it
+                    favoriteState = true
+                    favoriteButtonState(favoriteState)
+                }
             }
         }
     }

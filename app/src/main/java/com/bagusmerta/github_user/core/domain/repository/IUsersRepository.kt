@@ -17,6 +17,6 @@ interface IUsersRepository {
     fun getAllFavoriteUsers(): Flow<List<FavoriteUser>>
     suspend fun addFavoriteUser(entity: FavoriteUser)
     suspend fun deleteFavoriteUser(entity: FavoriteUser)
-    suspend fun getFavoriteUserByUsername(username: String): FavoriteUser?
+    fun getFavoriteUserByUsername(username: String): Flow<FavoriteUser?>
 
 }
