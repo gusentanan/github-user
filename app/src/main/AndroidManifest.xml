@@ -15,11 +15,11 @@
         <activity
             android:name=".presentation.detail.DetailActivity"
             android:exported="true"
-            android:theme="@style/Theme.Githubuser.ActionBar"/>
+            android:theme="@style/Theme.Githubuser.ActionBar" />
         <activity
             android:name=".presentation.favorite.FavoriteActivity"
             android:exported="true"
-            android:theme="@style/Theme.Githubuser.ActionBar"/>
+            android:theme="@style/Theme.Githubuser.ActionBar" />
         <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true"

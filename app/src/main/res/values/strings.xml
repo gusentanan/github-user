@@ -31,4 +31,5 @@
     <string name="delete_favorite_success">Successfully deleted favorite user</string>
     <string name="delete_favorite_failed">Something Wrong: delete favorite user</string>
 
+
 </resources>

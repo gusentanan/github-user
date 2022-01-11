@@ -1,6 +1,5 @@
 package com.bagusmerta.github_user.presentation.detail
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail

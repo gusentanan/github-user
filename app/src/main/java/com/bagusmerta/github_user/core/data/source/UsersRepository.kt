@@ -1,6 +1,5 @@
 package com.bagusmerta.github_user.core.data.source
 
-import android.util.Log
 import com.bagusmerta.github_user.core.data.source.local.dao.FavoriteDao
 import com.bagusmerta.github_user.core.data.source.remote.network.ApiServices
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser

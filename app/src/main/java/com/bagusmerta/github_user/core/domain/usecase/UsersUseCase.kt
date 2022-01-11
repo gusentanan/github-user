@@ -1,6 +1,6 @@
 package com.bagusmerta.github_user.core.domain.usecase
 
-import com.bagusmerta.github_user.core.data.source.local.entity.FavoriteEntity
+
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch

@@ -3,7 +3,6 @@ package com.bagusmerta.github_user.core.data.source.remote.network
 import com.bagusmerta.github_user.core.data.source.remote.response.SearchResponse
 import com.bagusmerta.github_user.core.data.source.remote.response.UserDetailResponse
 import com.bagusmerta.github_user.core.data.source.remote.response.UsersFollowingResponse
-import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
