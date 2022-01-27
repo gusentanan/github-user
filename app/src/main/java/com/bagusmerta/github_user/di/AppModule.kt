@@ -1,6 +1,6 @@
 package com.bagusmerta.github_user.di
 
-import com.bagusmerta.github_user.core.domain.usecase.UsersInteractor
+import com.bagusmerta.github_user.core.domain.usecase.UsersUseCaseImpl
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
 import com.bagusmerta.github_user.presentation.detail.DetailViewModel
 import com.bagusmerta.github_user.presentation.favorite.FavoriteViewModel
@@ -12,7 +12,7 @@ import org.koin.dsl.module
 
 
 val useCaseModule = module {
-    factory<UsersUseCase>  { UsersInteractor(get()) }
+    factory<UsersUseCase>  { UsersUseCaseImpl(get()) }
 }
 
 val viewModelModule = module {

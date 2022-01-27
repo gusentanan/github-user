@@ -5,7 +5,6 @@ import com.bagusmerta.github_user.core.data.source.remote.network.ApiServices
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
-import com.bagusmerta.github_user.core.domain.repository.IUsersRepository
 import com.bagusmerta.github_user.core.utils.DataMapper
 import com.bagusmerta.github_user.core.utils.ResultState
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +14,22 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import java.lang.Exception
 
-class UsersRepository(private val apiServices: ApiServices, private val favoriteDao: FavoriteDao): IUsersRepository {
+interface UsersRepository {
+    // remote
+    suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>>
+    suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>>
+    suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>>
+    suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>>
+
+    // local
+    fun getAllFavoriteUsers(): Flow<List<FavoriteUser>>
+    suspend fun addFavoriteUser(entity: FavoriteUser)
+    suspend fun deleteFavoriteUser(entity: FavoriteUser)
+    fun getFavoriteUserByUsername(username: String): Flow<FavoriteUser?>
+
+}
+
+class UsersRepositoryImpl(private val apiServices: ApiServices, private val favoriteDao: FavoriteDao): UsersRepository {
 
     override suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>> {
         return flow {

@@ -4,9 +4,9 @@ package com.bagusmerta.github_user.core.di
 import androidx.room.Room
 import com.bagusmerta.github_user.BuildConfig
 import com.bagusmerta.github_user.core.data.source.UsersRepository
+import com.bagusmerta.github_user.core.data.source.UsersRepositoryImpl
 import com.bagusmerta.github_user.core.data.source.local.GithubUserDatabase
 import com.bagusmerta.github_user.core.data.source.remote.network.ApiServices
-import com.bagusmerta.github_user.core.domain.repository.IUsersRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -50,5 +50,5 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single<IUsersRepository> { UsersRepository(get(), get()) }
+    single<UsersRepository> { UsersRepositoryImpl(get(), get()) }
 }

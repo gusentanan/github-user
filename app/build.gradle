@@ -66,6 +66,11 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitExtversion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    testImplementation "org.mockito:mockito-core:3.10.0"
+    testImplementation "org.mockito:mockito-inline:3.10.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
+    testImplementation 'android.arch.core:core-testing:1.1.1'
+    androidTestImplementation 'androidx.room:room-testing:2.4.1'
 
     //networking
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
