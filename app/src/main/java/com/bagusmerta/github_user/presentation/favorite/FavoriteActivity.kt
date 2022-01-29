@@ -6,6 +6,8 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
+import com.bagusmerta.github_user.core.utils.makeGone
+import com.bagusmerta.github_user.core.utils.makeVisible
 import com.bagusmerta.github_user.databinding.ActivityFavoriteBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -62,6 +64,8 @@ class FavoriteActivity : AppCompatActivity() {
     }
 
     private fun handleEmptyState(status: Boolean){
-        binding.lottieView.root.visibility = if (status) View.VISIBLE else View.GONE
+        binding.lottieView.root.let {
+            if (status) it.makeVisible() else it.makeGone()
+        }
     }
 }

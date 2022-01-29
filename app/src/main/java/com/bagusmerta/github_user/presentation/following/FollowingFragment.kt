@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.LoadingState
+import com.bagusmerta.github_user.core.utils.makeGone
+import com.bagusmerta.github_user.core.utils.makeVisible
 import com.bagusmerta.github_user.databinding.FragmentFollowingBinding
 import com.bagusmerta.github_user.presentation.detail.DetailActivity
 import com.bagusmerta.github_user.presentation.viewpager.ListFollowersAdapter
@@ -66,14 +68,16 @@ class FollowingFragment : Fragment() {
     }
 
     private fun handleLoadingState(loadingState: LoadingState){
-        binding.progressBar.visibility = if(loadingState is LoadingState.ShowLoading) VISIBLE else GONE
+        binding.progressBar.let {
+            if (loadingState is LoadingState.ShowLoading) it.makeVisible() else it.makeGone()
+        }
     }
 
     private fun handleEmptyResult(data: List<UsersItemSearch>){
         if (data.isEmpty()){
-            binding.tvNoData.visibility = VISIBLE
+            binding.tvNoData.makeVisible()
         } else {
-            binding.tvNoData.visibility = GONE
+            binding.tvNoData.makeGone()
         }
     }
 

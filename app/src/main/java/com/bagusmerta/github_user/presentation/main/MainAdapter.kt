@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
+import com.bagusmerta.github_user.core.utils.loadImage
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
 import com.bagusmerta.github_user.presentation.detail.DetailActivity
 import com.bumptech.glide.Glide
@@ -31,10 +32,8 @@ class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapt
         RecyclerView.ViewHolder(binding.root) {
             fun bind(item: UsersItemSearch){
                 binding.apply {
-                    Glide.with(itemView.context)
-                        .load(item.avatar)
-                        .into(imgItem)
                     tvItemName.text = item.login
+                    item.avatar?.let { imgItem.loadImage(it) }
 
                     itemView.setOnClickListener {
                         context.startActivity(Intent(context, DetailActivity::class.java).apply {

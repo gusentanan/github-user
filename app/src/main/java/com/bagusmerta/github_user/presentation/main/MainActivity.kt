@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.LoadingState
+import com.bagusmerta.github_user.core.utils.makeGone
+import com.bagusmerta.github_user.core.utils.makeVisible
 import com.bagusmerta.github_user.databinding.ActivityMainBinding
 import com.bagusmerta.github_user.presentation.favorite.FavoriteActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -101,19 +103,20 @@ class MainActivity : AppCompatActivity() {
     private fun handleLoadingState(loading: LoadingState) {
         binding.apply {
             if (loading is LoadingState.ShowLoading) {
-                progressBar.visibility = VISIBLE
-                handleEmptyState(false)
-                rvUsers.visibility = GONE
+                progressBar.makeVisible()
+                lottieView.root.makeGone()
+                rvUsers.makeGone()
             } else {
-                progressBar.visibility = GONE
-                handleEmptyState(false)
-                rvUsers.visibility = VISIBLE
+                progressBar.makeGone()
+                lottieView.root.makeGone()
+                rvUsers.makeVisible()
             }
         }
     }
 
     private fun handleEmptyState(status: Boolean) {
-        binding.lottieView.root.visibility = if (status) VISIBLE else GONE
+        binding.lottieView.root.let {
+            if (status) it.makeVisible() else it.makeGone()
+        }
     }
-
 }

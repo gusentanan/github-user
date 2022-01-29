@@ -9,9 +9,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.domain.model.UserDetail
+import com.bagusmerta.github_user.core.utils.*
 import com.bagusmerta.github_user.core.utils.Constants.EXTRA_USERNAME
-import com.bagusmerta.github_user.core.utils.DataMapper
-import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.databinding.ActivityDetailBinding
 import com.bagusmerta.github_user.presentation.viewpager.ViewPagerAdapter
 import com.bumptech.glide.Glide
@@ -113,16 +112,10 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleLoadingState(loadingState: LoadingState){
-        binding.progressBar.visibility = if(loadingState is LoadingState.ShowLoading) VISIBLE else GONE
-    }
-
     private fun handleUserDetailResult(userData: UserDetail){
         detailUser = userData
         binding.apply {
-            Glide.with(applicationContext)
-                .load(userData.avatarUrl)
-                .into(imgProfile)
+            userData.avatarUrl?.let { imgProfile.loadImage(it) }
 
             profileName.text = userData.name
             profileUsername.text = userData.login
@@ -135,26 +128,38 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun favoriteButtonState(state: Boolean){
-        if(state){
-            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
-        }else{
-            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        binding.fabFavorite.let {
+            if (state){
+                it.setImageResource(R.drawable.ic_baseline_favorite_24)
+            }else {
+                it.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            }
         }
     }
 
     private fun handleInsertState(state: Boolean){
-        if (state){
-            Toast.makeText(this, getString(R.string.add_to_favorite_success), Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this, getString(R.string.add_to_favorite_failed), Toast.LENGTH_SHORT).show()
+        this@DetailActivity.let {
+            if (state){
+                it.makeToast(getString(R.string.add_to_favorite_success))
+            }else{
+                it.makeToast(getString(R.string.add_to_favorite_failed))
+            }
         }
     }
 
     private fun handleDeleteState(state: Boolean){
-        if (state){
-            Toast.makeText(this, getString(R.string.delete_favorite_success), Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this, getString(R.string.delete_favorite_failed), Toast.LENGTH_SHORT).show()
+        this@DetailActivity.let {
+            if (state){
+                it.makeToast(getString(R.string.delete_favorite_success))
+            }else{
+                it.makeToast(getString(R.string.delete_favorite_failed))
+            }
+        }
+    }
+
+    private fun handleLoadingState(loadingState: LoadingState){
+        binding.progressBar.let {
+            if (loadingState is LoadingState.ShowLoading) it.makeVisible() else it.makeGone()
         }
     }
 

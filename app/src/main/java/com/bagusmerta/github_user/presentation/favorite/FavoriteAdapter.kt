@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
+import com.bagusmerta.github_user.core.utils.loadImage
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
 import com.bagusmerta.github_user.presentation.detail.DetailActivity
 import com.bumptech.glide.Glide
@@ -30,9 +31,7 @@ class FavoriteAdapter(private val context: Context) : RecyclerView.Adapter<Favor
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FavoriteUser){
             binding.apply {
-                Glide.with(itemView.context)
-                    .load(item.avatarUrl)
-                    .into(imgItem)
+                item.avatarUrl?.let { imgItem.loadImage(it) }
                 tvItemName.text = item.username
 
                 itemView.setOnClickListener {

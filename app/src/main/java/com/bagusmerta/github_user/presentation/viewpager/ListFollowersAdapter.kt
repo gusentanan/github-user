@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
+import com.bagusmerta.github_user.core.utils.loadImage
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
 import com.bumptech.glide.Glide
 
@@ -29,11 +30,8 @@ class ListFollowersAdapter(private val context: Context): RecyclerView.Adapter<L
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UsersItemSearch){
             binding.apply {
-                Glide.with(itemView.context)
-                    .load(item.avatar)
-                    .into(imgItem)
+                item.avatar?.let { imgItem.loadImage(it) }
                 tvItemName.text = item.login
-
             }
         }
     }
