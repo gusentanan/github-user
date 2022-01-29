@@ -1,8 +1,7 @@
 package com.bagusmerta.github_user.presentation.favorite
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser

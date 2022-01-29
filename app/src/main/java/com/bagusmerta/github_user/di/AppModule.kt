@@ -1,7 +1,7 @@
 package com.bagusmerta.github_user.di
 
-import com.bagusmerta.github_user.core.domain.usecase.UsersUseCaseImpl
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
+import com.bagusmerta.github_user.core.domain.usecase.UsersUseCaseImpl
 import com.bagusmerta.github_user.presentation.detail.DetailViewModel
 import com.bagusmerta.github_user.presentation.favorite.FavoriteViewModel
 import com.bagusmerta.github_user.presentation.followers.FollowersViewModel

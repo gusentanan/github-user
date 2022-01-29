@@ -1,10 +1,7 @@
 package com.bagusmerta.github_user.presentation.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.bagusmerta.github_user.R
 import com.bagusmerta.github_user.core.domain.model.FavoriteUser
@@ -13,7 +10,6 @@ import com.bagusmerta.github_user.core.utils.*
 import com.bagusmerta.github_user.core.utils.Constants.EXTRA_USERNAME
 import com.bagusmerta.github_user.databinding.ActivityDetailBinding
 import com.bagusmerta.github_user.presentation.viewpager.ViewPagerAdapter
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel

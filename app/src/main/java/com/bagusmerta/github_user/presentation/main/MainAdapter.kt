@@ -10,7 +10,6 @@ import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.loadImage
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
 import com.bagusmerta.github_user.presentation.detail.DetailActivity
-import com.bumptech.glide.Glide
 
 class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 

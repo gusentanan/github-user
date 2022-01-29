@@ -8,7 +8,6 @@ import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.core.utils.ResultState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class DetailViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
     private val _state = MutableLiveData<LoadingState>()

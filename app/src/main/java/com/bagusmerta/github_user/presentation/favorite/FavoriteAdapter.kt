@@ -10,7 +10,6 @@ import com.bagusmerta.github_user.core.domain.model.FavoriteUser
 import com.bagusmerta.github_user.core.utils.loadImage
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
 import com.bagusmerta.github_user.presentation.detail.DetailActivity
-import com.bumptech.glide.Glide
 
 class FavoriteAdapter(private val context: Context) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>()  {
     private var items = mutableListOf<FavoriteUser>()
