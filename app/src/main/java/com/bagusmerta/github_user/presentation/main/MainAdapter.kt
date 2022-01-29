@@ -32,7 +32,7 @@ class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapt
             fun bind(item: UsersItemSearch){
                 binding.apply {
                     tvItemName.text = item.login
-                    item.avatar?.let { imgItem.loadImage(it) }
+                    imgItem.loadImage(item.avatar)
 
                     itemView.setOnClickListener {
                         context.startActivity(Intent(context, DetailActivity::class.java).apply {

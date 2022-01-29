@@ -30,7 +30,7 @@ class FavoriteAdapter(private val context: Context) : RecyclerView.Adapter<Favor
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FavoriteUser){
             binding.apply {
-                item.avatarUrl?.let { imgItem.loadImage(it) }
+                imgItem.loadImage(item.avatarUrl)
                 tvItemName.text = item.username
 
                 itemView.setOnClickListener {

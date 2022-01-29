@@ -29,7 +29,7 @@ class ListFollowersAdapter(private val context: Context): RecyclerView.Adapter<L
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UsersItemSearch){
             binding.apply {
-                item.avatar?.let { imgItem.loadImage(it) }
+                imgItem.loadImage(item.avatar)
                 tvItemName.text = item.login
             }
         }
