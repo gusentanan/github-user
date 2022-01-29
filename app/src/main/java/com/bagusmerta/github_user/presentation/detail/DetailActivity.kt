@@ -111,8 +111,7 @@ class DetailActivity : AppCompatActivity() {
     private fun handleUserDetailResult(userData: UserDetail){
         detailUser = userData
         binding.apply {
-            userData.avatarUrl?.let { imgProfile.loadImage(it) }
-
+            imgProfile.loadImage(userData.avatarUrl)
             profileName.text = userData.name
             profileUsername.text = userData.login
             profileCompany.text = userData.company
