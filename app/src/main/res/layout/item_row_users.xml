@@ -10,7 +10,7 @@
     android:layout_marginRight="8dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    card_view:cardCornerRadius="16dp"
+    card_view:cardCornerRadius="30dp"
     android:backgroundTint="@color/white">
 
 
@@ -23,7 +23,7 @@
             android:id="@+id/img_item"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="4dp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize30Percent"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
@@ -35,16 +35,54 @@
 
         <TextView
             android:id="@+id/tv_item_name"
-            style="@style/Text.Header3"
+            style="@style/Text.Header4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/img_item"
             app:layout_constraintTop_toTopOf="@+id/img_item"
             tools:text="@string/tv_item_exname" />
+
+        <TextView
+            android:id="@+id/tv_item_location"
+            style="@style/Text.Header5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_700"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/img_item"
+            app:layout_constraintEnd_toStartOf="@id/iv_repository"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_name"
+            tools:text="@string/tv_item_exname" />
+
+        <ImageView
+            android:id="@+id/iv_repository"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_baseline_library_books_24"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_item_location"
+            app:layout_constraintStart_toEndOf="@id/tv_item_location"
+            app:layout_constraintTop_toTopOf="@id/tv_item_location"
+            android:contentDescription="@string/ex_repository"/>
+
+        <TextView
+            android:id="@+id/tv_item_repo"
+            style="@style/Text.Header5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_700"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_repository"
+            app:layout_constraintStart_toEndOf="@+id/iv_repository"
+            app:layout_constraintTop_toTopOf="@+id/iv_repository"
+            tools:text="32" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

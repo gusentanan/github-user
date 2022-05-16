@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/whitey"
     tools:context=".presentation.main.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -21,30 +22,72 @@
         app:layout_constraintGuide_percent="@dimen/constraint_guide_right_percent"/>
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_home"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_search"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="@dimen/dimens_16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        app:cardCornerRadius="@dimen/dimens_24dp"
+        app:layout_constraintEnd_toStartOf="@id/cv_btn_favorite"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/custom_app_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/sv_search"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:layout_marginBottom="@dimen/dimens_8dp"
+                android:layout_weight="1" />
 
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_btn_favorite"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="24dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/cv_search"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toEndOf="@id/cv_search"
+        app:layout_constraintTop_toTopOf="@+id/cv_search">
+
+        <ImageView
+            android:id="@+id/btn_favorite"
+            android:layout_gravity="center"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/favorite_users"
+            android:src="@drawable/ic_baseline_favorite_24" />
+
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_home"
+        app:layout_constraintTop_toBottomOf="@id/cv_search"
         tools:listitem="@layout/item_row_users" />
 
     <include

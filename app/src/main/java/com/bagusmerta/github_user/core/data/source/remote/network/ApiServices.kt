@@ -13,7 +13,7 @@ interface ApiServices {
     suspend fun getUsersBySearch(@Query("q") q: String) : SearchResponse
 
     @GET("users/{username}")
-    suspend fun getDetailUser(@Path("username") username: String): UserDetailResponse
+    suspend fun getDetailUser(@Path("username") username: String?): UserDetailResponse
 
     @GET("users/{username}/followers")
     suspend fun getUserFollowers(@Path("username") username: String): UsersFollowingResponse

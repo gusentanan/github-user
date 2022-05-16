@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bagusmerta.github_user.R
+import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.core.utils.makeGone
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModel()
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainAdapter: MainAdapter by lazy { MainAdapter(this) }
-    private val items = mutableListOf<UsersItemSearch>()
+    private val items = mutableListOf<UserDetail>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +33,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.elevation = 0f
+        initView()
         initRecyclerView()
         initSearchMenu()
         initStateObserver()
+    }
 
-        findViewById<ImageView>(R.id.btn_favorite).setOnClickListener {
+    private fun initView() {
+        binding.btnFavorite.setOnClickListener {
             startActivity(Intent(this@MainActivity, FavoriteActivity::class.java))
         }
     }
@@ -51,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initSearchMenu(){
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = findViewById<SearchView>(R.id.sv_search)
+        val searchView = binding.svSearch
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)
@@ -93,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleUsersResult(result: List<UsersItemSearch>) {
+    private fun handleUsersResult(result: List<UserDetail>) {
         items.clear()
         items.addAll(result)
         mainAdapter.setItems(items)

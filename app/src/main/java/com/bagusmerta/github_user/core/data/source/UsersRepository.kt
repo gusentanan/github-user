@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.map
 
 interface UsersRepository {
     // remote
-    suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>>
+    suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UserDetail>>>
     suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>>
     suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>>
     suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>>
@@ -30,14 +30,19 @@ interface UsersRepository {
 
 class UsersRepositoryImpl(private val apiServices: ApiServices, private val favoriteDao: FavoriteDao): UsersRepository {
 
-    override suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+    override suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UserDetail>>> {
         return flow {
+            val listUsers = arrayListOf<UserDetail>()
             try {
                 val res = apiServices.getUsersBySearch(username)
-                val dataMap = res.items?.let { data ->
-                    DataMapper.mapUserSearchResponseToDomain(data)
+                if(res.items != null){
+                    res.items.forEach {
+                        val data = apiServices.getDetailUser(it.login)
+                        val final = DataMapper.mapUserDetailResponseToDomain(data)
+                        listUsers.add(final)
+                    }
                 }
-                emit(ResultState.Success(dataMap))
+                emit(ResultState.Success(listUsers))
             } catch (e: Exception){
                 emit(ResultState.Error(e.toString()))
             }

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.loadImage
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
@@ -13,7 +14,7 @@ import com.bagusmerta.github_user.presentation.detail.DetailActivity
 
 class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    private var items = mutableListOf<UsersItemSearch>()
+    private var items = mutableListOf<UserDetail>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.MainViewHolder {
         val binding = ItemRowUsersBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -29,10 +30,12 @@ class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapt
 
     inner class MainViewHolder(private var binding: ItemRowUsersBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(item: UsersItemSearch){
+            fun bind(item: UserDetail){
                 binding.apply {
                     tvItemName.text = item.login
-                    imgItem.loadImage(item.avatar)
+                    tvItemLocation.text = item.location
+                    tvItemRepo.text = item.publicRepos.toString()
+                    imgItem.loadImage(item.avatarUrl)
 
                     itemView.setOnClickListener {
                         context.startActivity(Intent(context, DetailActivity::class.java).apply {
@@ -44,7 +47,7 @@ class MainAdapter(private val context: Context) : RecyclerView.Adapter<MainAdapt
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(data: MutableList<UsersItemSearch>){
+    fun setItems(data: MutableList<UserDetail>){
         this.items = data
         notifyDataSetChanged()
     }

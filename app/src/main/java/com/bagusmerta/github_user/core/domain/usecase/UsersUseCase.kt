@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UsersUseCase {
 
-    suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>>
+    suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UserDetail>>>
     suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>>
     suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>>
     suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>>
@@ -24,7 +24,7 @@ interface UsersUseCase {
 
 class UsersUseCaseImpl(private val userRepository: UsersRepository): UsersUseCase {
 
-    override suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+    override suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UserDetail>>> {
         return userRepository.getUsersByUsername(username)
     }
 
