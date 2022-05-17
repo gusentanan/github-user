@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.domain.usecase.UsersUseCase
 import com.bagusmerta.github_user.core.utils.LoadingState
@@ -14,12 +15,12 @@ import kotlinx.coroutines.launch
 class FollowersViewModel(private val usersUseCase: UsersUseCase): ViewModel() {
     private val _state = MutableLiveData<LoadingState>()
     private val _error = MutableLiveData<String?>()
-    private val _resFollowers = MutableLiveData<List<UsersItemSearch>?>()
+    private val _resFollowers = MutableLiveData<List<UserDetail>?>()
 
     val state: LiveData<LoadingState>
         get() = _state
 
-    val resFollowers: LiveData<List<UsersItemSearch>?>
+    val resFollowers: LiveData<List<UserDetail>?>
         get() = _resFollowers
 
 

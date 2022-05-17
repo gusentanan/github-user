@@ -17,8 +17,8 @@ interface UsersRepository {
     // remote
     suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UserDetail>>>
     suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>>
-    suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>>
-    suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>>
+    suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UserDetail>>>
+    suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UserDetail>>>
 
     // local
     fun getAllFavoriteUsers(): Flow<List<FavoriteUser>>
@@ -61,24 +61,34 @@ class UsersRepositoryImpl(private val apiServices: ApiServices, private val favo
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+    override suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UserDetail>>> {
         return flow {
+            val listFollowers = arrayListOf<UserDetail>()
             try {
                 val res = apiServices.getUserFollowers(username)
-                val dataMap = DataMapper.mapUserSearchResponseToDomain(res) // gonna fix this later
-                emit(ResultState.Success(dataMap))
+                res.forEach {
+                    val data = apiServices.getDetailUser(it.login)
+                    val final = DataMapper.mapUserDetailResponseToDomain(data)
+                    listFollowers.add(final)
+                }
+                emit(ResultState.Success(listFollowers))
             } catch (e: Exception){
                 emit(ResultState.Error(e.toString()))
             }
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+    override suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UserDetail>>> {
         return flow {
+            val listFollowing = arrayListOf<UserDetail>()
             try {
                 val res = apiServices.getUserFollowing(username)
-                val dataMap = DataMapper.mapUserSearchResponseToDomain(res) // this one too !
-                emit(ResultState.Success(dataMap))
+                res.forEach {
+                    val data = apiServices.getDetailUser(it.login)
+                    val final = DataMapper.mapUserDetailResponseToDomain(data)
+                    listFollowing.add(final)
+                }
+                emit(ResultState.Success(listFollowing))
             } catch (e: Exception){
                 emit(ResultState.Error(e.toString()))
             }

@@ -5,13 +5,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.loadImage
 import com.bagusmerta.github_user.databinding.ItemRowUsersBinding
 
 class ListFollowersAdapter(private val context: Context): RecyclerView.Adapter<ListFollowersAdapter.ViewHolder>()  {
 
-    private var items = mutableListOf<UsersItemSearch>()
+    private var items = mutableListOf<UserDetail>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListFollowersAdapter.ViewHolder {
         val binding = ItemRowUsersBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -27,16 +28,18 @@ class ListFollowersAdapter(private val context: Context): RecyclerView.Adapter<L
 
     inner class ViewHolder(private var binding: ItemRowUsersBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: UsersItemSearch){
+        fun bind(item: UserDetail){
             binding.apply {
-                imgItem.loadImage(item.avatar)
+                imgItem.loadImage(item.avatarUrl)
                 tvItemName.text = item.login
+                tvItemLocation.text = item.location
+                tvItemRepo.text = item.publicRepos.toString()
             }
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(data: MutableList<UsersItemSearch>){
+    fun setItems(data: MutableList<UserDetail>){
         this.items = data
         notifyDataSetChanged()
     }

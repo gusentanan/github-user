@@ -34,9 +34,16 @@ class DetailActivity : AppCompatActivity() {
         viewPager = binding.viewPager
         tabs = binding.tabs
 
+        initView()
         initActionBar()
         initViewPager()
         initStateObserver()
+    }
+
+    private fun initView() {
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     fun getUsernameUsers(): String {
@@ -62,11 +69,6 @@ class DetailActivity : AppCompatActivity() {
                 1 -> tab.text = getString(R.string.following)
             }
         }.attach()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 
     private fun setFavoriteUser(){

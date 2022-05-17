@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bagusmerta.github_user.core.domain.model.UserDetail
 import com.bagusmerta.github_user.core.domain.model.UsersItemSearch
 import com.bagusmerta.github_user.core.utils.LoadingState
 import com.bagusmerta.github_user.core.utils.makeGone
@@ -20,7 +21,7 @@ class FollowersFragment : Fragment() {
     private val followersVieModel: FollowersViewModel by viewModel()
     private val binding: FragmentFollowersBinding by lazy { FragmentFollowersBinding.inflate(layoutInflater) }
     private val listAdapter: ListFollowersAdapter by lazy { ListFollowersAdapter(requireContext()) }
-    private var listUsers = mutableListOf<UsersItemSearch>()
+    private var listUsers = mutableListOf<UserDetail>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +58,7 @@ class FollowersFragment : Fragment() {
         }
     }
 
-    private fun handleUsersFollowers(data: List<UsersItemSearch>) {
+    private fun handleUsersFollowers(data: List<UserDetail>) {
         handleEmptyResult(data)
         listUsers.clear()
         listUsers.addAll(data)
@@ -70,7 +71,7 @@ class FollowersFragment : Fragment() {
         }
     }
 
-    private fun handleEmptyResult(data: List<UsersItemSearch>){
+    private fun handleEmptyResult(data: List<UserDetail>){
         if (data.isEmpty()){
             binding.tvNoData.makeVisible()
         } else {

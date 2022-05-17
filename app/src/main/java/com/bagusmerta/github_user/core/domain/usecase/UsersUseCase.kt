@@ -12,8 +12,8 @@ interface UsersUseCase {
 
     suspend fun getUsersByUsername(username: String): Flow<ResultState<List<UserDetail>>>
     suspend fun getDetailUser(username: String): Flow<ResultState<UserDetail>>
-    suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>>
-    suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>>
+    suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UserDetail>>>
+    suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UserDetail>>>
 
     fun getAllFavoriteUsers(): Flow<List<FavoriteUser>>
     suspend fun addFavoriteUser(entity: FavoriteUser)
@@ -32,11 +32,11 @@ class UsersUseCaseImpl(private val userRepository: UsersRepository): UsersUseCas
         return userRepository.getDetailUser(username)
     }
 
-    override suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+    override suspend fun getUsersFollowers(username: String): Flow<ResultState<List<UserDetail>>> {
         return userRepository.getUsersFollowers(username)
     }
 
-    override suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UsersItemSearch>>> {
+    override suspend fun getUsersFollowing(username: String): Flow<ResultState<List<UserDetail>>> {
         return userRepository.getUsersFollowing(username)
     }
 

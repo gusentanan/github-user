@@ -105,4 +105,11 @@
         <item name="cornerSize">30%</item>
     </style>
 
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="background">@drawable/shape_rectangle</item>
+        <item name="singleLine">false</item>
+        <item name="tabPaddingEnd">15dp</item>
+    </style>
+
 </resources>
