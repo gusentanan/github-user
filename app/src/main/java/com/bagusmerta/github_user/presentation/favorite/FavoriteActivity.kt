@@ -24,15 +24,17 @@ class FavoriteActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.favorite_users)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        initView()
         initRecyclerView()
         initStateObserver()
-
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
+    private fun initView() {
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
+
 
     private fun initRecyclerView() {
         with(binding){

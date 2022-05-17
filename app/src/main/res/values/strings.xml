@@ -30,6 +30,8 @@
     <string name="add_to_favorite_failed">Something Wrong: add favorite user</string>
     <string name="delete_favorite_success">Successfully deleted favorite user</string>
     <string name="delete_favorite_failed">Something Wrong: delete favorite user</string>
+    <string name="back_button">back button</string>
+    <string name="favorite_header">Favorite</string>
 
 
 </resources>

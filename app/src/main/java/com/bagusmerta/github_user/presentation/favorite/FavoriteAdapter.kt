@@ -32,6 +32,8 @@ class FavoriteAdapter(private val context: Context) : RecyclerView.Adapter<Favor
             binding.apply {
                 imgItem.loadImage(item.avatarUrl)
                 tvItemName.text = item.username
+                tvItemLocation.text = item.location
+                tvItemRepo.text = item.publicRepos.toString()
 
                 itemView.setOnClickListener {
                     context.startActivity(Intent(context, DetailActivity::class.java).apply {
