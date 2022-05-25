@@ -57,49 +57,64 @@ tools:context=".presentation.detail.DetailActivity">
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintBottom_toTopOf="@id/guideline_top"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintEnd_toEndOf="@id/fab_favorite"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/ex_username" />
 
+    <ImageButton
+        android:id="@+id/fab_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/whitey"
+        android:layout_marginEnd="10dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_to_favorite"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_username"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintTop_toTopOf="@+id/profile_username"/>
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_profile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="@id/guideline_top"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize30Percent"
         tools:ignore="ImageContrastCheck"
         tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/profile_name"
-        style="@style/Text.Header3"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toEndOf="@id/img_profile"
-        app:layout_constraintTop_toTopOf="@id/guideline_top"
-        tools:text="@string/ex_name" />
-
-    <TextView
-        android:id="@+id/profile_company"
-        style="@style/Text.Header3"
+    <LinearLayout
+        android:id="@+id/tv_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/img_profile"
-        app:layout_constraintEnd_toEndOf="@+id/profile_name"
-        app:layout_constraintStart_toStartOf="@+id/profile_name"
-        app:layout_constraintTop_toBottomOf="@+id/profile_name"
-        tools:text="@string/ex_company" />
+        app:layout_constraintStart_toEndOf="@+id/img_profile"
+        app:layout_constraintTop_toTopOf="@+id/img_profile">
 
-    <TextView
-        android:id="@+id/profile_location"
-        style="@style/Text.Header4"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_profile"
-        app:layout_constraintEnd_toEndOf="@+id/profile_company"
-        app:layout_constraintStart_toStartOf="@+id/profile_company"
-        app:layout_constraintTop_toBottomOf="@+id/profile_company"
-        tools:text="@string/ex_location" />
+        <TextView
+            android:id="@+id/profile_name"
+            style="@style/Text.Header3"
+            android:textColor="@color/black_text"
+            tools:text="@string/ex_name" />
+
+        <TextView
+            android:id="@+id/profile_company"
+            style="@style/Text.Header3"
+            tools:text="@string/ex_company" />
+
+        <TextView
+            android:id="@+id/profile_location"
+            style="@style/Text.Header4"
+            android:textSize="14sp"
+            tools:text="@string/ex_location" />
+
+    </LinearLayout>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_detail"
@@ -131,6 +146,7 @@ tools:context=".presentation.detail.DetailActivity">
                 <TextView
                     style="@style/Text.SubHeader1"
                     android:textStyle="bold"
+                    android:textColor="@color/black_text"
                     android:text="@string/tv_repository"
                     android:textSize="12sp" />
 
@@ -152,6 +168,7 @@ tools:context=".presentation.detail.DetailActivity">
                 <TextView
                     style="@style/Text.SubHeader1"
                     android:textStyle="bold"
+                    android:textColor="@color/black_text"
                     android:text="@string/tv_following"
                     android:textSize="12sp" />
 
@@ -173,6 +190,7 @@ tools:context=".presentation.detail.DetailActivity">
                 <TextView
                     style="@style/Text.SubHeader1"
                     android:textStyle="bold"
+                    android:textColor="@color/black_text"
                     android:text="@string/tv_followers"
                     android:textSize="12sp" />
 
@@ -192,36 +210,35 @@ tools:context=".presentation.detail.DetailActivity">
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:layout_marginStart="@dimen/dimens_32dp"
+        android:layout_marginEnd="@dimen/dimens_32dp"
+        android:background="@color/whitey"
         android:theme="@style/TabLayoutStyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.902"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/card_detail"
-        app:layout_constraintVertical_bias="0.06"
+        app:tabBackground="@drawable/tab_color"
+        app:tabIndicator="@drawable/shape_rectangle_back"
         app:tabIndicatorColor="@color/alter_gray"
-        app:tabTextColor="@android:color/tertiary_text_dark" />
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="8dp"
+        app:tabRippleColor="@null"
+        app:tabTextColor="@android:color/tertiary_text_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintTop_toBottomOf="@+id/card_detail"
+        app:layout_constraintVertical_bias="0.027"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/dimens_24dp"
+        android:layout_marginEnd="@dimen/dimens_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-     android:id="@+id/fab_favorite"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:src="@drawable/ic_baseline_favorite_border_24"
-     android:layout_gravity="bottom|end"
-     android:layout_margin="24dp"
-     android:contentDescription="@string/add_to_favorite"/>
 
 <ProgressBar
     android:id="@+id/progress_bar"
